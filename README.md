@@ -70,8 +70,8 @@ CineAI Explorer is a next-generation web application that transforms any IMDb mo
 ### Installation
 Clone the repository:
 ```bash
-git clone https://github.com/VanshSharma07/cineai-explorer.git
-cd cineai-explorer
+git clone https://github.com/VanshSharma07/BREW-Assignment.git
+cd BREW-Assignment
 ```
 Install dependencies:
 ```bash
@@ -106,7 +106,7 @@ Deploy instantly to Vercel:
 
 Developed by [Vansh Bargotra](https://www.linkedin.com/in/vansh-bargotra-895371261/).
 
-[GitHub](https://github.com/VanshSharma07)
+[GitHub](https://github.com/VanshSharma07/BREW-Assignment)
 
 MIT License. Free for personal and educational use.
 
