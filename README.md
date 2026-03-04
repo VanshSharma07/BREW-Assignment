@@ -1,5 +1,7 @@
 # 🎬 BREW CineAI Explorer
 
+[Live Demo](https://brew-assignment-iota.vercel.app/)
+
 # 🚀 CineAI Explorer
 
 CineAI Explorer is a next-generation web application that transforms any IMDb movie ID into a rich, interactive dashboard powered by advanced AI. This app is designed from scratch for originality, modern aesthetics, and impactful features—no templates, clones, or reused branding.
@@ -11,6 +13,7 @@ CineAI Explorer is a next-generation web application that transforms any IMDb mo
 - **AI-Powered Plot Rewriter:** Instantly generate creative plot rewrites for any movie, tailored to different genres and audiences.
 - **Character Deep-Dive:** Explore detailed AI-generated profiles, motivations, and backstories for main cast members.
 - **Cultural Impact Analysis:** Get a concise, AI-driven summary of the movie’s influence on pop culture, society, and its legacy.
+- **Audience Sentiment Analyzer:** See a summary and classification of real audience sentiment, powered by AI analysis of reviews and comments.
 - **Interactive Trivia & Quizzes:** Test your knowledge with AI-generated movie trivia—select answers, reveal results, and learn fun facts.
 - **Modern Sci-Fi UI:** Minimal, glassmorphic design inspired by the best in SaaS and futuristic interfaces. Responsive, fast, and beautiful.
 
@@ -21,29 +24,7 @@ CineAI Explorer is a next-generation web application that transforms any IMDb mo
 - **IMDb Integration:** Fetches real movie data (title, year, rating, plot, cast, poster) using a valid IMDb ID.
 - **OpenAI GPT-4o Backend:** All advanced features are powered by GPT-4o for creative, accurate, and safe results.
 - **Collapsible AI Sections:** Each feature is presented in expandable cards for a clean, scroll-free experience.
-- **Robust Input Validation:** Prevents invalid IMDb IDs, empty input, and handles errors gracefully.
-- **Quick Test Buttons:** Instantly analyze popular movies with one click.
-- **TypeScript & Next.js 16:** Built with strict typing, modern React, and the latest Next.js App Router.
-# 🚀 CineAI Explorer
-
-CineAI Explorer is a next-generation web application that transforms any IMDb movie ID into a rich, interactive dashboard powered by advanced AI. This app is designed from scratch for originality, modern aesthetics, and impactful features—no templates, clones, or reused branding.
-
----
-
-## ✨ Core AI Features
-
-- **AI-Powered Plot Rewriter:** Instantly generate creative plot rewrites for any movie, tailored to different genres and audiences.
-- **Character Deep-Dive:** Explore detailed AI-generated profiles, motivations, and backstories for main cast members.
-- **Cultural Impact Analysis:** Get a concise, AI-driven summary of the movie’s influence on pop culture, society, and its legacy.
-- **Interactive Trivia & Quizzes:** Test your knowledge with AI-generated movie trivia—select answers, reveal results, and learn fun facts.
-
----
-
-## 🖥️ Features
-
-- **IMDb Integration:** Fetches real movie data (title, year, rating, plot, cast, poster) using a valid IMDb ID.
-- **OpenAI GPT-4o Backend:** All advanced features are powered by GPT-4o for creative, accurate, and safe results.
-- **Collapsible AI Sections:** Each feature is presented in expandable cards for a clean, scroll-free experience.
+- **Audience Sentiment Analyzer:** AI-powered summary and classification of audience reviews/comments.
 - **Robust Input Validation:** Prevents invalid IMDb IDs, empty input, and handles errors gracefully.
 - **Quick Test Buttons:** Instantly analyze popular movies with one click.
 - **TypeScript & Next.js 16:** Built with strict typing, modern React, and the latest Next.js App Router.

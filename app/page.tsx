@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState } from "react";
@@ -7,6 +6,8 @@ import SearchBar from "./components/SearchBar";
 import ErrorAlert from "./components/ErrorAlert";
 import MovieDetails from "./components/MovieDetails";
 import Footer from "./components/Footer";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 
 interface MovieData {
   success: boolean;
@@ -78,28 +79,77 @@ export default function Home() {
     executeSearch(imdbId, e);
   };
 
+  // Scroll reveal animation for main content
+  const mainRef = useRef<HTMLDivElement>(null);
+  const [mainVisible, setMainVisible] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (mainRef.current) {
+        const rect = mainRef.current.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          setMainVisible(true);
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0B0F1A] to-[#111827] text-[#F9FAFB] selection:bg-[#22D3EE]/30 overflow-x-hidden font-inter">
+    <div className="min-h-screen bg-linear-to-br from-[#0B0B0C] to-[#111111] text-[#F5F5F5] selection:bg-[#F4C542]/20 overflow-x-hidden font-inter">
       <Header />
-      <main className="max-w-6xl mx-auto px-4 py-24 relative">
-        <section className="max-w-2xl mx-auto text-center mb-24">
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight" style={{fontFamily: 'var(--font-orbitron)'}}>
-            Discover <span className="text-[#22D3EE]">Movie Insights</span>
-          </h2>
-          <p className="text-[#94A3B8] mb-10 text-lg md:text-xl font-light leading-relaxed" style={{fontFamily: 'var(--font-inter)'}}>
-            Enter an IMDb ID (e.g., <span className="font-orbitron bg-[#22D3EE]/10 px-2 py-1 rounded-md border border-[#22D3EE]/20 shadow-sm">tt0133093</span>) to unlock AI-powered plot rewrites, deep character profiles, cultural impact analysis, and interactive movie trivia & quizzes.
+      <main ref={mainRef} className="max-w-6xl mx-auto px-4 py-16 md:py-24 relative">
+        {/* Hero Section */}
+        <section className="max-w-2xl mx-auto text-center mb-16 md:mb-24">
+          <h1
+            className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight hover:scale-105 hover:text-[#E6B325] transition-transform duration-400"
+            style={{fontFamily: 'var(--font-playfair)', color: '#F4C542', letterSpacing: '0.02em'}}>
+            Discover Movie Insights
+          </h1>
+          <p
+            className="text-[#B3B3B3] mb-8 text-lg md:text-xl font-light leading-relaxed hover:scale-[1.02] hover:text-[#F4C542] transition-all duration-400"
+            style={{fontFamily: 'var(--font-inter)'}}>
+            Build cinematic intelligence dashboards for any film. Enter an IMDb ID (e.g., <span className="font-playfair bg-[#151515] px-2 py-1 rounded-md border border-[#D4AF37]/40 shadow-sm text-[#F4C542] hover:bg-[#232323] hover:text-[#E6B325] transition-colors duration-400">tt0133093</span>) to unlock AI-powered plot rewrites, audience analysis, and more.
           </p>
-          <SearchBar
-            imdbId={imdbId}
-            setImdbId={setImdbId}
-            loading={loading}
-            onSubmit={handleFormSubmit}
-            suggestions={suggestions}
-            onSuggestionClick={handleSuggestionClick}
-          />
-          <ErrorAlert error={error} />
+          <div className="flex flex-col items-center w-full max-w-xl mx-auto mb-6">
+            <SearchBar
+              imdbId={imdbId}
+              setImdbId={setImdbId}
+              loading={loading}
+              onSubmit={handleFormSubmit}
+              suggestions={suggestions}
+              onSuggestionClick={handleSuggestionClick}
+            />
+            <ErrorAlert error={error} />
+          </div>
         </section>
-        <MovieDetails movieData={movieData} loading={loading} />
+        {/* Results Section with Animation */}
+        <AnimatePresence mode="wait">
+          {movieData && !loading && (
+            <motion.div
+              key={'main'}
+              initial={{ opacity: 0, y: 40 }}
+              animate={mainVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+              exit={{ opacity: 0, y: 40 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <MovieDetails movieData={movieData} loading={loading} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+        {loading && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 z-50 flex flex-col items-center justify-center pt-20"
+            transition={{ duration: 0.5 }}
+          >
+            <div className="w-16 h-16 border-4 border-[#F4C542]/30 border-t-[#D4AF37] rounded-full animate-spin mb-4"></div>
+            <p className="text-[#F4C542] font-bold animate-pulse" style={{fontFamily: 'var(--font-playfair)'}}>Loading AI features...</p>
+          </motion.div>
+        )}
       </main>
       <Footer />
     </div>

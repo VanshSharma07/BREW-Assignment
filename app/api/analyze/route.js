@@ -41,8 +41,28 @@ export async function POST(req) {
     }
 
     // ==========================================
+    // STEP 1.5: Fetch Audience Reviews/Comments (placeholder for now)
+    // ==========================================
+    let audienceReviews = [];
+    try {
+      // Example: fetch from OMDb API (does not provide reviews, so fallback to placeholder)
+      // const omdbRes = await fetch(`https://www.omdbapi.com/?i=${trimmedId}&apikey=YOUR_OMDB_KEY`);
+      // const omdbData = await omdbRes.json();
+      // audienceReviews = omdbData.Reviews || [];
+      // Placeholder reviews for demo
+      audienceReviews = [
+        "Absolutely loved the visuals and story!",
+        "The acting was top-notch, but the pacing felt slow.",
+        "A masterpiece. Will watch again!",
+        "Not my cup of tea, but the soundtrack was great.",
+        "Mixed feelings. Some parts were brilliant, others confusing."
+      ];
+    } catch (err) {
+      console.log("Failed to fetch audience reviews. Using placeholder.");
+    }
 
-    // STEP 2: Ask OpenAI for Movie Intelligence Features
+    // ==========================================
+    // STEP 2: Ask OpenAI for Movie Intelligence Features (including audience reviews)
     // ==========================================
     const url = "https://api.openai.com/v1/chat/completions";
     const prompt = `You are an expert movie database and creative AI assistant. For the IMDb movie ID: ${trimmedId} ${realTitle ? `(Title: ${realTitle})` : ""}, return the following in JSON:
@@ -54,10 +74,15 @@ export async function POST(req) {
     - plot (string)
     - posterUrl (string)
     - cast (array of strings)
+    - audienceReviews (array of strings): raw audience reviews/comments
+    - audienceSentimentSummary (string): AI summary of audience sentiment based on reviews
+    - overallSentiment (string): strictly classify as Positive, Mixed, or Negative
     - plotRewrites (array of objects: { genre, audience, rewrittenPlot }) for at least 3 genres/audiences: e.g. 'Romantic Comedy', 'Sci-Fi Thriller', 'For Kids'
     - characterProfiles (array of objects: { name, profile, motivation, backstory }) for main cast
     - culturalImpact (string): summary of the movie's cultural, social, or historical impact
     - triviaQuiz (array of objects: { question, options, answer }) with at least 3 quiz questions about the movie
+    Use these audience reviews/comments for sentiment analysis:
+    ${audienceReviews.map((r, i) => `${i + 1}. ${r}`).join('\n')}
     If the ID is invalid or unknown, return success: false and an errorMessage.`;
 
     const payload = {
