@@ -93,6 +93,4 @@ MIT License. Free for personal and educational use.
 
 ---
 
-## 💡 Inspiration & Vision
 
-CineAI Explorer is built to showcase the creative potential of AI in entertainment, education, and interactive web experiences. Every feature is original, impactful, and designed for real users—no clones, no shortcuts, just innovation.
